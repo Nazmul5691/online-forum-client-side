@@ -11,6 +11,7 @@ const Navbar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const DefaultProfileIcon = "https://i.ibb.co/Xt52hBm/profile.png";
 
+  console.log(user);
   const [announcements, setAnnouncements] = useState([]);
 
   const isUserRegistered = users.length > 0;
@@ -84,79 +85,43 @@ const Navbar = () => {
         </NavLink>
       </li>
       
-      {users.map((item) => (
-        <tr key={item._id}>
-          <td>
-            <li>
-              <div className="relative inline-block">
-                <img
-                  className="w-10 rounded-full cursor-pointer"
-                  src={item.photo || DefaultProfileIcon}
-                  alt=""
-                  onClick={toggleDropdown}
-                />
-                {dropdownVisible && (
-                  <div className="dropdown-content absolute w-28 bg-white shadow-md p-2 rounded top-10 right-0">
-                    <p className="text-gray-600 font-semibold">
-                      {item.displayName || item.name}
-                    </p>
-                    <NavLink
-                      className="block text-gray-600 hover:text-blue-500 py-1"
-                      to="/dashboard"
-                    >
-                      Dashboard
-                    </NavLink>
-                    <button
-                      className="block text-gray-600 hover:text-red-500 py-1"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            </li>
-          </td>
-          
-        </tr>
-      ))}
+     
+      
 
-
-
-      {user ? (
-        <li>
-          {/* <div className="relative inline-block">
-            <img
-              className="w-10 rounded-full cursor-pointer"
-              src={user.photoURL || DefaultProfileIcon}
-              alt=""
-              onClick={toggleDropdown}
-            />
-            {dropdownVisible && (
-              <div className="dropdown-content absolute w-28 bg-white shadow-md p-2 rounded top-10 right-0">
-                <p className="text-gray-600 font-semibold">
-                  {user.displayName || user.name}
-                </p>
-                <NavLink
-                  className="block text-gray-600 hover:text-blue-500 py-1"
-                  to="/dashboard"
-                >
-                  Dashboard
-                </NavLink>
-                <button
-                  className="block text-gray-600 hover:text-red-500 py-1"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div> */}
-        </li>
-
-
-
-      ) : 
+      {user ? <tr key={user._id}>
+            <td>
+              <li>
+                <div className="relative inline-block">
+                  <img
+                    className="w-10 rounded-full cursor-pointer"
+                    src={user.photo || DefaultProfileIcon}
+                    alt=""
+                    onClick={toggleDropdown}
+                  />
+                  {dropdownVisible && (
+                    <div className="dropdown-content absolute w-28 bg-white shadow-md p-2 rounded top-10 right-0">
+                      <p className="text-gray-600 font-semibold">
+                        {user.displayName || user.name}
+                      </p>
+                      <NavLink
+                        className="block text-gray-600 hover:text-blue-500 py-1"
+                        to="/dashboard"
+                      >
+                        Dashboard
+                      </NavLink>
+                      <button
+                        className="block text-gray-600 hover:text-red-500 py-1"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </li>
+            </td>
+            
+          </tr> : 
       (
         <li>
           <NavLink className="font-bold" to="/login">
